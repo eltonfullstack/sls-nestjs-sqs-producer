@@ -1,0 +1,19 @@
+service: nest-sqs-serverless
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  environment:
+    SQS_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/440292544878/sqs-message
+
+functions:
+  api:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          path: messages
+          method: post
+
+plugins:
+  - serverless-offline
